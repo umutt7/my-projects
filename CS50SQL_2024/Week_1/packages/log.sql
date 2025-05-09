@@ -1,0 +1,47 @@
+
+-- *** The Lost Letter ***
+-- First, I want to find the packages sent from Anneke's address, 900 Somerville Avenue
+-- But to do that, I have to find the ID of that address
+-- SELECT "id" FROM "addresses" WHERE "address" = '900 Somerville Avenue';
+-- The result is 432
+-- Now, I can find packages sent from address id 432
+-- But before that, it might be helpful to find the ID of destination address
+-- As Anneke says, the name of the address is tricky, I can use LIKE keyword
+-- SELECT "id" FROM "addresses" WHERE "address" LIKE '%Finnegan Street%';
+-- No result, I will try other clues
+-- SELECT "id", "address"  FROM "addresses" WHERE "address" LIKE '%Fin%';
+-- I ended up with 6 results, and the true address is "2 Finnigan Street" with ID of 854
+-- Now I can find that specific package
+-- SELECT * FROM "packages" WHERE "from_address_id" = 432 AND "to_address_id" = 854;
+-- The package ID is 384
+-- Let's find what happened to 384
+-- SELECT * FROM "scans" WHERE "package_id" = 384;
+-- Seems like the package is dropped to the correct destination
+-- Let's find out the type of address for the answer
+-- SELECT * FROM "addresses" WHERE "id" = 854;
+-- It's a residential, 2 Finnigan Street
+
+-- *** The Devious Delivery ***
+-- It seems like the content is something like a rubber duck. Let's try to find it
+-- SELECT * FROM "packages" WHERE "contents" LIKE '%duck%';
+-- Too many results to investigate, but one seems quite different. According to the fella, the sender address is empty
+-- which means "from_address_id" should be NULL. Only one package fits the description: 5098, Duck debugger
+-- Let's see what happened to the 5098
+-- SELECT * FROM "scans" WHERE "package_id" = 5098;
+-- It's dropped at address_id 348
+-- Now, we will learn about that address
+-- SELECT * FROM "addresses" WHERE "id" = 348;
+-- 7 Humboldt Place, Police Station
+
+-- *** The Forgotten Gift ***
+-- The package sent from 109 Tileston Street to 728 Maple Place, let's find the IDs
+-- SELECT * FROM "addresses" WHERE "address" = '109 Tileston Street' OR "address" = '728 Maple Place';
+-- 9873 and 4983
+-- Now, let's find about the package, using address IDs
+-- SELECT * FROM "packages" WHERE "from_address_id" = 9873 AND "to_address_id" = 4983;
+-- ID is 9523, and it includes flowers
+-- Let's track down that package
+-- SELECT * FROM "scans" WHERE "package_id" = 9523;
+-- It's recently been picked up a driver with ID of 17, but who are them?
+-- SELECT * FROM "drivers" WHERE "id" = 17;
+-- Mikel

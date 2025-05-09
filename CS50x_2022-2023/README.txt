@@ -1,0 +1,1 @@
+This file contains all of my submissions for the Harvard's CS50x: Introduction to Programming course.

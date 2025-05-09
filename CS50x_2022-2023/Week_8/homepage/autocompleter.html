@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+        <link href="styles.css" rel="stylesheet">
+        <title>Autocompleter</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+
+    <body>
+        <div style="background-color: #78aa00">
+            <h1 style="text-align: center">Autocompleter</h1>
+            <hr>
+        </div>
+        <p style="text-align: center"><img src="https://c.tenor.com/bCfpwMjfAi0AAAAC/cat-typing.gif" alt="typing cat" style="width:50%:height:50%">
+        </p>
+
+        <p>
+        <b>HOW TO USE: </b>As we mentioned in previous page, the website will try to autocomplete, or guess, the word you are typing in.
+        </p>
+        <p>
+        For example, start typing "apple" (without quotes). As you type the letter a, the program will list you all the words starting with a.
+        Because there's a large amount of words in the program's dictionary, getting the results for the first few letters might take a long time, please be patient.
+        </p>
+        <p>
+        Mind that you do not have to hit enter the submit the letters you typed in. The program always watching what you've typed in.
+
+        </p>
+
+        <div style="text-align: center">
+        <input autocomplete="off" autofocus placeholder="word" style="height:25px; width:300px;" type="text">
+        </div>
+
+        <ol></ol>
+
+        <script src="large.js"></script>
+        <script>
+
+            let input = document.querySelector('input');
+            input.addEventListener('keyup', function(event) {
+                let html = '';
+                if (input.value) {
+                    for (word of WORDS) {
+                        if (word.startsWith(input.value)) {
+                            html += `<li>${word}</li>`;
+                        }
+                    }
+                }
+                document.querySelector('ol').innerHTML = html;
+            });
+
+        </script>
+    </body>
+
+</html>

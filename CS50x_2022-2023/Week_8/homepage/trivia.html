@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles_trivia.css" rel="stylesheet">
+        <title>Trivia!</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script>
+            // TODO: Add code to check answers to questions
+            // Run when DOM is loaded
+            document.addEventListener('DOMContentLoaded', function() {
+
+                // When correct answer is clicked...
+                let correct = document.querySelector('.correct');
+                correct.addEventListener('click', function() {
+                    correct.style.backgroundColor = 'green';
+                    document.querySelector('#feedback1').innerHTML = 'Correct!';
+                });
+
+                // When any incorrect answer is clicked...
+                let incorrects = document.querySelectorAll('.incorrect');
+                for (let i = 0; i < incorrects.length; i++) {
+                    incorrects[i].addEventListener('click', function() {
+                        incorrects[i].style.backgroundColor = 'red';
+                        document.querySelector('#feedback1').innerHTML = 'Incorrect!';
+                    });
+                }
+
+                // Free response question:
+                document.querySelector('#check').addEventListener('click', function() {
+                    let input = document.querySelector('input');
+                    if (input.value == 'counter++') {
+                        input.style.backgroundColor = 'green';
+                        document.querySelector('#feedback2').innerHTML = 'Correct!';
+                    } else {
+                        input.style.backgroundColor = 'red';
+                        document.querySelector('#feedback2').innerHTML = 'Incorrect!';
+                    }
+                });
+
+            });
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <h2>Part 1: Multiple Choice </h2>
+                <hr>
+                <!-- TODO: Add multiple choice question here -->
+                <h3>
+                    Which one of the following games is not first person shooter (FPS)?
+                </h3>
+                <button class="correct">The Sims 4</button>
+                <button class="incorrect">Counter-Strike: Global Offensive</button>
+                <button class="incorrect">Apex Legends</button>
+                <button class="incorrect">Call of Duty 5</button>
+                <button class="incorrect">Battlefield 1</button>
+                <p id="feedback1"></p>
+            </div>
+
+            <div class="section">
+                <h2>Part 2: Free Response</h2>
+                <hr>
+                <!-- TODO: Add free response question here -->
+                <h3>
+                    In the programming language C, what is the shortest way to increase the value of "counter" by one? (without semicolon)
+                </h3>
+                <input type="text"></input>
+                <button id="check">Check Answer</button>
+                <p id="feedback2"></p>
+            </div>
+        </div>
+    </body>
+</html>
